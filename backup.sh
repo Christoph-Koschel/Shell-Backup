@@ -10,6 +10,7 @@ function mainmenu() {
 	echo "|-----------------------------------|"
 	echo "|  Hauptmenu                        |"
 	echo "|-----------------------------------|"
+	echo "|  (0) Setup                        |"
 	echo "|  (1) Backup erstellen             |"
 	echo "|  (2) Backup zurück spielen        |"
 	echo "|  (3) Inhalt des Backups           |"
@@ -204,6 +205,53 @@ function listBackup() {
 	rm $TMP_FILE
 }
 
+function installProgram() {
+	if [ -d ./backups ]
+	then
+		rm -r ./backups
+	fi
+
+	mkdir ./backups
+}
+
+function deinstallProgram() {
+	if [ test -d ./backups ]
+	then
+		rm -r ./backups
+	fi
+}
+
+function setup() {
+	while :
+	do
+		clear
+		echo "|-----------------------------------|"
+		echo "|  SETUP                            |"
+		echo "|-----------------------------------|"
+		echo "|  (0) Installieren                 |"
+		echo "|  (1) De-Installieren              |"
+		echo "|  (2) Exit                         |"
+		echo "|-----------------------------------|"
+		read -p "|  Eingabe > " SETUP
+
+		case $SETUP in
+			0)
+				installProgram
+				;;
+			1)
+				deinstallProgram
+				;;
+			2)
+				break
+				;;
+			*)
+				echo "Wrong user input"
+				;;
+		esac
+		sleep 1
+	done
+}
+
 
 while :
 do
@@ -211,6 +259,9 @@ do
 	mainmenu
 
 	case  $CMD in
+		0)
+			setup
+			;;
 		1)
 			backup
 			;;
