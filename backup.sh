@@ -234,7 +234,7 @@ function setup() {
 		echo "|-----------------------------------|"
 		read -p "|  Eingabe > " SETUP
 
-		case $SETUP in
+			case $SETUP in
 			0)
 				installProgram
 				;;
@@ -252,6 +252,28 @@ function setup() {
 	done
 }
 
+function doTask() {
+	COUNT=$(ls ./backups | wc -l)
+	if [ $COUNT = 0 ]
+	then
+		echo "You can only do backups or the setup"
+		sleep 1
+		return
+	fi
+
+	case $1 in
+		2)
+			undoBackup
+			;;
+		3)
+			listBackup
+			;;
+		4)
+			deleteBackup
+			;;
+	esac
+}
+
 
 while :
 do
@@ -262,17 +284,12 @@ do
 		0)
 			setup
 			;;
+
 		1)
 			backup
 			;;
-		2)
-			undoBackup
-			;;
-		3)
-			listBackup
-			;;
-		4)
-			deleteBackup
+		2|3|4)
+			doTask $CMD
 			;;
 		5)
 			exit 0
