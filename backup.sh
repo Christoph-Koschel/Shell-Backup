@@ -13,8 +13,8 @@ function mainmenu() {
 	echo "|  (1) Backup erstellen             |"
 	echo "|  (2) Backup zurück spielen        |"
 	echo "|  (3) Inhalt des Backups           |"
-	echo "|  (3) Backup löschen               |"
-	echo "|  (4) Exit                         |"
+	echo "|  (4) Backup löschen               |"
+	echo "|  (5) Exit                         |"
 	echo "|-----------------------------------|"
 	read -p "|  Eingabe > " CMD
 }
@@ -155,8 +155,7 @@ function deleteBackup() {
 		I=$((I+1))
 	done
 
-
-	echo I
+	rm $FILE
 }
 
 function listBackup() {
